@@ -12,4 +12,11 @@ class User extends Model {
     protected $connection = 'mysql';
     public $timestamps = false;
     protected $fillable = ['username', 'password', 'email_address', 'firstname', 'lastname', 'is_employee', 'icon_url', 'icon_key'];
+    public function getLeadingProjects() {
+        return $this->hasMany(Project::class);
+    }
+
+    public function getAssignedToProjects() {
+        return $this->belongsToMany(Project::class);
+    }
 };
