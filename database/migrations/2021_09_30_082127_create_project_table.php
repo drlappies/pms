@@ -13,10 +13,10 @@ class CreateProjectTable extends Migration {
     public function up() {
         Schema::create('project', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('org_id')->nullable(false);
-            $table->foreign('org_id')->references('id')->on('org')->onUpdate('cascade')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id')->nullable(false);
+            $table->foreign('user_id')->references('id')->on('user');
             $table->string('title', 100)->nullable(false);
-            $table->longText('desc')->nullable(true);
+            $table->string('desc')->nullable(true);
             $table->datetime('start_datetime')->nullable(true);
             $table->datetime('due_datetime')->nullable(true);
             $table->enum('priority', ['unspecified', 'low', 'normal', 'high', 'urgent'])->default('unspecified');

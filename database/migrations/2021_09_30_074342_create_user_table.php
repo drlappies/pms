@@ -15,12 +15,11 @@ class CreateUserTable extends Migration {
             $table->id();
             $table->string('username')->nullable(false);
             $table->string('password')->nullable(false);
-            $table->string('email_address', 320)->nullable(false);
             $table->string('firstname', 100)->nullable(false);
             $table->string('lastname', 100)->nullable(false);
             $table->string('is_employee')->default(false);
-            $table->string('icon_url')->nullable(true);
-            $table->string('icon_key')->nullable(true);
+            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_project_manager')->default(false);
         });
     }
     /**

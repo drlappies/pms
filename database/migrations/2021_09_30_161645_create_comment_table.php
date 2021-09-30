@@ -14,15 +14,15 @@ class CreateCommentTable extends Migration {
         Schema::create('comment', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('author_id')->nullable(false);
+            $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('user');
-            $table->unsignedBigInteger('todo_id')->nullable(false);
-            $table->foreign('todo_id')->references('id')->on('todo');
-            $table->unsignedBigInteger('todo_tagged_id')->nullable(false);
-            $table->foreign('todo_tagged_id')->references('id')->on('todo');
-            $table->unsignedBigInteger('user_tagged_id')->nullable(false);
-            $table->foreign('user_tagged_id')->references('id')->on('user');
-            $table->string('body')->nullable(false);
+            $table->unsignedBigInteger('task_id');
+            $table->foreign('task_id')->references('id')->on('task');
+            $table->unsignedBigInteger('tagged_user_id');
+            $table->foreign('tagged_user_id')->references('id')->on('user');
+            $table->unsignedBigInteger('tagged_subtask_id');
+            $table->foreign('tagged_subtask_id')->references('id')->on('subtask');
+            $table->string('comment')->nullable(false);
         });
     }
 

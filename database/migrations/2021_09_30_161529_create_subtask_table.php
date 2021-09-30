@@ -4,19 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaskTable extends Migration {
+class CreateSubtaskTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('task', function (Blueprint $table) {
+        Schema::create('subtask', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('project_id')->nullable(false);
-            $table->foreign('project_id')->references('id')->on('project');
+            $table->unsignedBigInteger('task_id')->nullable(false);
+            $table->foreign('task_id')->references('id')->on('task');
             $table->string('title', 100)->nullable(false);
-            $table->longText('desc')->nullable(true);
+            $table->string('desc')->nullable(true);
             $table->datetime('start_datetime')->nullable(true);
             $table->datetime('due_datetime')->nullable(true);
             $table->enum('priority', ['unspecified', 'low', 'normal', 'high', 'urgent'])->default('unspecified');
@@ -30,6 +30,6 @@ class CreateTaskTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('task');
+        Schema::dropIfExists('subtask');
     }
 }

@@ -4,17 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTodoTable extends Migration {
+class CreateTaskTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('todo', function (Blueprint $table) {
+        Schema::create('task', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 100)->nullable(true);
-            $table->longText('desc')->nullable(false);
+            $table->unsignedBigInteger('project_id')->nullable(false);
+            $table->foreign('project_id')->references('id')->on('project');
+            $table->string('title', 100)->nullable(false);
+            $table->string('desc')->nullable(true);
             $table->datetime('start_datetime')->nullable(true);
             $table->datetime('due_datetime')->nullable(true);
             $table->enum('priority', ['unspecified', 'low', 'normal', 'high', 'urgent'])->default('unspecified');
@@ -28,6 +30,6 @@ class CreateTodoTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('todo');
+        Schema::dropIfExists('task');
     }
 }

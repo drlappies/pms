@@ -4,18 +4,18 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTaskUserTable extends Migration {
+class CreateSubtaskUserTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
     public function up() {
-        Schema::create('task_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->nullable(false);
+        Schema::create('subtask_user', function (Blueprint $table) {
+            $table->unsignedBigInteger('subtask_id');
+            $table->foreign('subtask_id')->references('id')->on('subtask');
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('user');
-            $table->unsignedBigInteger('task_id')->nullable(false);
-            $table->foreign('task_id')->references('id')->on('task');
         });
     }
 
@@ -25,6 +25,6 @@ class CreateTaskUserTable extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('task_user');
+        Schema::dropIfExists('subtask_user');
     }
 }
