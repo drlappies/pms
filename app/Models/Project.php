@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model {
     use HasFactory;
     protected $table = 'project';
-    protected $primaryKey = 'id';
-    protected $connection = 'mysql';
-    public $timestamps = false;
     protected $fillable = ['user_id', 'title', 'desc', 'start_datetime', 'due_datetime', 'priority', 'status'];
-    public function getManager() {
+    public function manager() {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function getAssignees() {
+    public function assignee() {
         return $this->belongsToMany(User::class);
+    }
+
+    public function task() {
+        return $this->hasMany(Task::class);
     }
 }

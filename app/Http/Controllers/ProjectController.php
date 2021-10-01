@@ -10,10 +10,10 @@ use DateTime;
 class ProjectController extends Controller {
     public function getall() {
         try {
-            $projects = Project::get();
-            return response()->json(['projects' => $projects], 200);
+            $projects = Project::with('manager', 'assignee', 'task')->get();
+            return response()->json(['projects' => $projects]);
         } catch (Throwable $err) {
-            return response()->json($err, 400);
+            return response($err, 400);
         }
     }
 
@@ -21,11 +21,12 @@ class ProjectController extends Controller {
         try {
             ['id' => $id] = $request;
             [$project] = Project::where('id', '=', $id)->get();
-            [$personInCharge] = $project->getManager()->select('firstname', 'lastname')->get();
-            $projectAssignees = $project->getAssignees()->select('firstname', 'lastname')->get();
-            return response()->json(['project' => $project, 'person_in_charge' => $personInCharge, 'assignees' => $projectAssignees], 200);
+            [$personInCharge] = $project->manager()->select('firstname', 'lastname')->get();
+            $projectAssignees = $project->assignee()->select('firstname', 'lastname')->get();
+            $projectTasks = $project->task()->select()->get();
+            return response()->json(['project' => $project, 'person_in_charge' => $personInCharge, 'assignees' => $projectAssignees, 'tasks' => $projectTasks]);
         } catch (Throwable $err) {
-            return response()->json($err, 400);
+            return response($err, 400);
         }
     }
 
@@ -53,7 +54,7 @@ class ProjectController extends Controller {
 
             return response()->json(['success' => "Successfully created project {$project->title}!"]);
         } catch (Throwable $err) {
-            return response()->json($err, 400);
+            return response($err, 400);
         }
     }
 
@@ -80,7 +81,7 @@ class ProjectController extends Controller {
 
             return response()->json(['success' => "Successfully updated project {$id}"]);
         } catch (Throwable $err) {
-            return response()->json($err, 400);
+            return response($err, 400);
         }
     }
 
@@ -90,7 +91,7 @@ class ProjectController extends Controller {
             Project::where('id', '=', $id)->delete();
             return response()->json(['success' => "Successfully deleted project {$id}"]);
         } catch (Throwable $err) {
-            return response()->json($err, 400);
+            return response($err, 400);
         }
     }
 }
