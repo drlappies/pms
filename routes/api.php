@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectUserController;
+use App\Http\Controllers\TaskController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -25,3 +26,9 @@ Route::delete('/project/{id}',  [ProjectController::class, 'destroy']);
 
 Route::post('/project/{projectid}/user/{userid}', [ProjectUserController::class, 'assign']);
 Route::delete('/project/{projectid}/user/{userid}', [ProjectUserController::class, 'unassign']);
+
+Route::get('/project/{projectid}/task', [TaskController::class, 'getall']);
+Route::get('/project/{projectid}/task/{id}', [TaskController::class, 'getone']);
+Route::post('/project/{projectid}/task', [TaskController::class, 'create']);
+Route::put('/project/{projectid}/task/{id}', [TaskController::class, 'update']);
+Route::delete('/project/{projectid}/task/{id}', [TaskController::class, 'destroy']);
