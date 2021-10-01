@@ -1,9 +1,9 @@
 <template>
-  <div>APP COMPONENT</div>
+  <div>
+    <router-view></router-view>
+  </div>
 </template>
-
-<script>
-export default {
   
-};
+<script>
+export default {};
 </script>
