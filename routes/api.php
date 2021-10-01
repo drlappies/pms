@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectUserController;
+use App\Http\Controllers\SubtaskController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskUserController;
 
@@ -36,3 +37,9 @@ Route::delete('/project/{projectid}/task/{id}', [TaskController::class, 'destroy
 
 Route::post('/project/{projectid}/task/{taskid}/user/{userid}', [TaskUserController::class, 'assign']);
 Route::delete('/project/{projectid}/task/{taskid}/user/{userid}', [TaskUserController::class, 'unassign']);
+
+Route::get('/task/{taskid}/subtask', [SubtaskController::class, 'getall']);
+Route::get('/task/{taskid}/subtask/{subtaskid}', [SubtaskController::class, 'getone']);
+Route::post('/task/{taskid}/subtask', [SubtaskController::class, 'create']);
+Route::put('/task/{taskid}/subtask/{subtaskid}', [SubtaskController::class, 'update']);
+Route::delete('/task/{taskid}/subtask/{subtaskid}', [SubtaskController::class, 'destroy']);
