@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectUserController;
 use App\Http\Controllers\SubtaskController;
+use App\Http\Controllers\SubtaskUserController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TaskUserController;
 
@@ -43,3 +44,6 @@ Route::get('/task/{taskid}/subtask/{subtaskid}', [SubtaskController::class, 'get
 Route::post('/task/{taskid}/subtask', [SubtaskController::class, 'create']);
 Route::put('/task/{taskid}/subtask/{subtaskid}', [SubtaskController::class, 'update']);
 Route::delete('/task/{taskid}/subtask/{subtaskid}', [SubtaskController::class, 'destroy']);
+
+Route::post('/task/{taskid}/subtask/{subtaskid}/user/{userid}', [SubtaskUserController::class, 'assign']);
+Route::delete('/task/{taskid}/subtask/{subtaskid}/user/{userid}', [SubtaskUserController::class, 'unassign']);
