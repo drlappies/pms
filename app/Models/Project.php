@@ -9,6 +9,7 @@ class Project extends Model {
     use HasFactory;
     protected $table = 'project';
     protected $fillable = ['user_id', 'title', 'desc', 'start_datetime', 'due_datetime', 'priority', 'status'];
+    public $timestamps = false;
     public function manager() {
         return $this->belongsTo(User::class, 'user_id');
     }

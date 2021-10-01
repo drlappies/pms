@@ -18,9 +18,9 @@ class CreateCommentTable extends Migration {
             $table->foreign('author_id')->references('id')->on('user');
             $table->unsignedBigInteger('task_id');
             $table->foreign('task_id')->references('id')->on('task');
-            $table->unsignedBigInteger('tagged_user_id');
+            $table->unsignedBigInteger('tagged_user_id')->nullable(true);
             $table->foreign('tagged_user_id')->references('id')->on('user');
-            $table->unsignedBigInteger('tagged_subtask_id');
+            $table->unsignedBigInteger('tagged_subtask_id')->nullable(true);
             $table->foreign('tagged_subtask_id')->references('id')->on('subtask');
             $table->string('comment')->nullable(false);
         });

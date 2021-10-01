@@ -14,4 +14,8 @@ class Subtask extends Model {
     public function task() {
         return $this->belongsTo(Task::class, 'task_id');
     }
+
+    public function taggedComment() {
+        return $this->hasMany(Comment::class, 'tagged_subtask_id');
+    }
 }

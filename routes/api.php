@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -47,3 +48,9 @@ Route::delete('/task/{taskid}/subtask/{subtaskid}', [SubtaskController::class, '
 
 Route::post('/task/{taskid}/subtask/{subtaskid}/user/{userid}', [SubtaskUserController::class, 'assign']);
 Route::delete('/task/{taskid}/subtask/{subtaskid}/user/{userid}', [SubtaskUserController::class, 'unassign']);
+
+Route::get('/task/{taskid}/comment', [CommentController::class, 'getall']);
+Route::get('/task/{taskid}/comment/{commentid}', [CommentController::class, 'getone']);
+Route::put('/task/{taskid}/comment/{commentid}', [CommentController::class, 'update']);
+Route::post('/task/{taskid}/comment', [CommentController::class, 'create']);
+Route::delete('/task/{taskid}/comment/{commentid}', [CommentController::class, 'delete']);
