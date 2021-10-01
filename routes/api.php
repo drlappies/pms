@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectUserController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TaskUserController;
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -32,3 +33,6 @@ Route::get('/project/{projectid}/task/{id}', [TaskController::class, 'getone']);
 Route::post('/project/{projectid}/task', [TaskController::class, 'create']);
 Route::put('/project/{projectid}/task/{id}', [TaskController::class, 'update']);
 Route::delete('/project/{projectid}/task/{id}', [TaskController::class, 'destroy']);
+
+Route::post('/project/{projectid}/task/{taskid}/user/{userid}', [TaskUserController::class, 'assign']);
+Route::delete('/project/{projectid}/task/{taskid}/user/{userid}', [TaskUserController::class, 'unassign']);
